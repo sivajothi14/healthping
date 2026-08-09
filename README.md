@@ -1,66 +1,26 @@
-# Hi there 👋 It's me, Sivajothi Prakash
+# HealthPing
 
-🎓 Information Technology Student  
-💻 Aspiring Software Developer  
-🚀 Java and DSA Enthusiast
+HealthPing is a Django-based monitoring service for cron jobs, scheduled tasks,
+and recurring background work. Jobs send HTTP pings to their checks, and the
+service alerts when a ping is late or missing.
 
-## About me
+## Features
 
-- 🔭 Currently focusing on **DSA with Java** and core software development skills
-- 🌱 Learning **Java, problem solving, DBMS, OS, CN**, and real-world development
-- 👩‍💻 Preparing for on-campus and off-campus placement opportunities
-- 🎯 Dream: To work at a top IT company
-- ✨ Fun fact: I believe consistency beats talent
-
-## HealthPing
-
-HealthPing is my personal monitoring project based on a Django web application.
-It helps monitor scheduled jobs and recurring tasks by receiving health pings and
-alerting when a task is late or missed.
-
-The project includes:
-
-- A web dashboard for checks, schedules, logs, and status badges
-- HTTP APIs for creating checks and sending pings
-- Team projects and access control
-- Multiple notification integrations
+- Dashboard for checks, schedules, logs, and status badges
+- HTTP ping and management APIs
+- Project-based access control and team members
+- Email, chat, paging, SMS, and webhook integrations
+- WebAuthn two-factor authentication
 - SQLite, PostgreSQL, MySQL, and MariaDB support
 - Docker deployment configuration
 
-## 🌐 Social presence
+## Requirements
 
-- [LinkedIn](https://www.linkedin.com/)
-- [Instagram](https://www.instagram.com/)
-- [GitHub](https://github.com/sivajothi14)
+- Python 3.12+
+- SQLite for local development, or PostgreSQL/MySQL/MariaDB for deployment
+- System libraries required by `pycurl` and the selected database driver
 
-Replace the LinkedIn and Instagram links with your profile URLs when ready.
-
-## 💻 I code in
-
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-
-## 🧰 Tools and technologies
-
-![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-
-## 🧠 Currently working on
-
-- 📌 Daily **DSA practice**, LeetCode-style
-- 📌 Building a mini project every **three days**
-- 📌 Improving my GitHub and LinkedIn presence
-- 📌 Interview-oriented preparation
-
-## Local development
-
-HealthPing is a Django application. To run it locally:
+## Local setup
 
 ```sh
 python -m venv .venv
@@ -70,11 +30,50 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-Open `http://127.0.0.1:8000/` after starting the server.
+Open `http://127.0.0.1:8000/` after starting the development server.
 
-## Project checks
+## Configuration
+
+Configuration is provided through environment variables. Common settings include:
+
+| Variable | Purpose |
+| --- | --- |
+| `SECRET_KEY` | Django signing key |
+| `DEBUG` | Enable development mode with `True` |
+| `SITE_ROOT` | Public URL of the installation |
+| `DB` | `sqlite`, `postgres`, `mysql`, or `mariadb` |
+| `DB_HOST` | Database hostname |
+| `DB_NAME` | Database name or SQLite path |
+| `DB_USER` | Database username |
+| `DB_PASSWORD` | Database password |
+| `HC_VERSION` | Optional application version label |
+
+See `hc/settings.py` and `docker/.env.example` for the available configuration
+options.
+
+## Tests and quality checks
 
 ```sh
 python manage.py test
 mypy hc
 ```
+
+## Docker
+
+Build the image from the repository root:
+
+```sh
+docker build -f docker/Dockerfile -t healthping .
+docker run --env-file docker/.env -p 8000:8000 healthping
+```
+
+For production, use persistent storage and an external database. The
+`docker/docker-compose.yml` file provides a PostgreSQL-based setup.
+
+## Project layout
+
+- `hc/` — Django application, APIs, models, integrations, and utilities
+- `templates/` — HTML templates and rendered documentation fragments
+- `static/` — CSS, JavaScript, fonts, and images
+- `docker/` — container image and deployment configuration
+- `.github/workflows/` — automated tests, type checks, and image publishing
