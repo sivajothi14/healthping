@@ -1,92 +1,80 @@
-# Healthchecks
+# Hi there 👋 It's me, Sivajothi Prakash
 
-Healthchecks is a Django service for monitoring cron jobs, scheduled tasks, and
-other recurring work. A check receives a ping before its deadline; if the ping
-is late or missing, Healthchecks can notify your team through its integrations.
+🎓 Information Technology Student  
+💻 Aspiring Software Developer  
+🚀 Java and DSA Enthusiast
 
-## What is included
+## About me
 
-- Web dashboard and HTTP API
-- Check schedules, grace periods, pauses, logs, and status badges
-- Team projects and role-based access
-- WebAuthn two-factor authentication
-- Notifications through email, chat, paging, SMS, and webhooks
-- Self-hosted SQLite, PostgreSQL, MySQL, and MariaDB support
+- 🔭 Currently focusing on **DSA with Java** and core software development skills
+- 🌱 Learning **Java, problem solving, DBMS, OS, CN**, and real-world development
+- 👩‍💻 Preparing for on-campus and off-campus placement opportunities
+- 🎯 Dream: To work at a top IT company
+- ✨ Fun fact: I believe consistency beats talent
 
-## Requirements
+## HealthPing
 
-- Python 3.12 or newer
-- A supported database (SQLite is convenient for local development)
-- System libraries required by `pycurl` and your selected database driver
+HealthPing is my personal monitoring project based on a Django web application.
+It helps monitor scheduled jobs and recurring tasks by receiving health pings and
+alerting when a task is late or missed.
+
+The project includes:
+
+- A web dashboard for checks, schedules, logs, and status badges
+- HTTP APIs for creating checks and sending pings
+- Team projects and access control
+- Multiple notification integrations
+- SQLite, PostgreSQL, MySQL, and MariaDB support
+- Docker deployment configuration
+
+## 🌐 Social presence
+
+- [LinkedIn](https://www.linkedin.com/)
+- [Instagram](https://www.instagram.com/)
+- [GitHub](https://github.com/sivajothi14)
+
+Replace the LinkedIn and Instagram links with your profile URLs when ready.
+
+## 💻 I code in
+
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
+## 🧰 Tools and technologies
+
+![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+
+## 🧠 Currently working on
+
+- 📌 Daily **DSA practice**, LeetCode-style
+- 📌 Building a mini project every **three days**
+- 📌 Improving my GitHub and LinkedIn presence
+- 📌 Interview-oriented preparation
 
 ## Local development
 
-Create and activate a virtual environment, then install the dependencies:
+HealthPing is a Django application. To run it locally:
 
 ```sh
 python -m venv .venv
 . .venv/bin/activate
 python -m pip install -r requirements.txt -r requirements-dev.txt
-```
-
-Initialize the local database and start Django:
-
-```sh
 python manage.py migrate
 python manage.py runserver
 ```
 
-Open `http://127.0.0.1:8000/`. The default development settings use SQLite,
-enable debug mode, and allow registration. Set `SECRET_KEY` before running in
-any shared or production environment.
+Open `http://127.0.0.1:8000/` after starting the server.
 
-## Configuration
-
-Settings are read from environment variables. Common deployment variables are:
-
-| Variable | Purpose |
-| --- | --- |
-| `SECRET_KEY` | Django signing key; required for a real deployment |
-| `DB` | Select `sqlite`, `postgres`, `mysql`, or `mariadb` |
-| `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` | Database connection settings |
-| `SITE_ROOT` | Public base URL of the installation |
-| `DEBUG` | Use `True` only for local development |
-| `DEFAULT_FROM_EMAIL` | Sender address for system email |
-| `HC_VERSION` | Optional version label displayed by the application |
-
-See `hc/settings.py` for the complete set of supported options.
-
-## Tests and checks
-
-Run the test suite with:
+## Project checks
 
 ```sh
 python manage.py test
-```
-
-Run type checking with:
-
-```sh
 mypy hc
 ```
-
-The documentation pages are shipped as pre-rendered HTML fragments under
-`templates/docs`. The search index can be rebuilt with:
-
-```sh
-python manage.py populate_searchdb
-```
-
-## Docker
-
-The `docker/` directory contains the production image definition and uWSGI
-configuration. Build and run it with your preferred database and environment
-configuration:
-
-```sh
-docker build -f docker/Dockerfile -t healthchecks .
-docker run --env-file .env -p 8000:8000 healthchecks
-```
-
-Use a persistent volume for application data when running SQLite, or use an
-external PostgreSQL, MySQL, or MariaDB database for production workloads.
